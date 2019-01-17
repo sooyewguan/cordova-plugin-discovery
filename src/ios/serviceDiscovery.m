@@ -52,10 +52,10 @@ NSMutableArray *serviceArr;
                     memset(&broadcastAddr, 0, sizeof broadcastAddr);
                     broadcastAddr.sin_family = AF_INET;
                     inet_pton(AF_INET, "239.255.255.250", &broadcastAddr.sin_addr);
-                    broadcastAddr.sin_port = htons(1900);
+                    broadcastAddr.sin_port = htons(1982);
 
                     // Send the broadcast request for the given service type
-                    NSString *request = [[@"M-SEARCH * HTTP/1.1\r\nHOST: 239.255.255.250:1900\r\nMAN: \"ssdp:discover\"\r\nST: " stringByAppendingString:serviceType] stringByAppendingString:@"\r\nMX: 2\r\n\r\n"];
+                    NSString *request = [[@"M-SEARCH * HTTP/1.1\r\nHOST: 239.255.255.250:1982\r\nMAN: \"ssdp:discover\"\r\nST: " stringByAppendingString:serviceType] stringByAppendingString:@"\r\nMX: 2\r\n\r\n"];
                     char *requestStr = [request UTF8String];
 
                     ret = sendto(sd, requestStr, strlen(requestStr), 0, (struct sockaddr*)&broadcastAddr, sizeof broadcastAddr);
